@@ -12,7 +12,7 @@ class AddController
 	 */
 	private $template;
 
-	private $registerService;
+	private $addService;
 
 	/**
 	 * @param ndrobnjak\SimpleTemplateEngine
@@ -23,14 +23,10 @@ class AddController
 		$this->addService = $addService;
 	}
 
-	public function showAddSeries() {
-		echo $this->template->render("addSeries.html.php");
+	public function showAddFilm() {
+		echo $this->template->render("addFilm.html.php");
 	}
 	
-	public function showAddActors() {
-		echo $this->template->render("addActors.html.php");
-	}
-
 	/*public function Add(array $data) {
 		if(array_key_exists("email", $data)){
 			echo $this->template->render("register.html.php",[
@@ -42,5 +38,18 @@ class AddController
 		}
 
 	}*/
+
+	public function AddFilm(array $data) {
+		if( !array_key_exists("email", $data) || !array_key_exists("pw", $data) || !array_key_exists("username", $data) || !array_key_exists("vorname", $data) || !array_key_exists("nachname", $data) || !array_key_exists("strasse", $data) || !array_key_exists("ort", $data)){
+			echo $this->template->render("register.html.php",[
+					"msg" => "Ungültige Anfrage"
+			]);
+			return;
+		}
+	
+		$this->registerService->register($data['email'], $data['username'], $data['pw'], $data['vorname'], $data['nachname'], $data['strasse'], $data['ort']);
+		echo $this->template->render("home.html.php");
+	
+	}
 }
 

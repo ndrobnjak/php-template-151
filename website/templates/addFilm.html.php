@@ -9,8 +9,20 @@
 <?php
 require_once("../web/header.php");
 ?>
-	<h3>Add Series</h3>
+	<h3>Add Film</h3>
 	<form method="POST">
+	HEloou
+		<label>
+			Filmtitel:
+			<input type="text" name="filmtitel" />
+		</label>
+		<br>
+		<label>
+			Beschreibung:
+			<input type="text" name="beschreibung" />
+		</label>
+		<br>
+		<input type="submit" name="addfilm" value="AddFilm" />
 		
 	</form>
 </body>

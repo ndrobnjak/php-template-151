@@ -41,14 +41,10 @@ switch($_SERVER["REQUEST_URI"]) {
 		case "/search":
 			$cnt = $factory->getSearchController();
 			$cnt->showSearch();
-			break;
-		case "/account":
-			$cnt = $factory->getAccountController();
-			$cnt->showAccount();
-			break;
-		case "/add-series":
+			break;		
+		case "/add-filme":
 			$cnt = $factory->getAddController();
-			$cnt->showAddSeries();
+			$cnt->showAddFilm();
 			break;
 			case "/add-actors":
 				$cnt = $factory->getAddController();
