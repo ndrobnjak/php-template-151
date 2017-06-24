@@ -1,30 +1,65 @@
 <?php
-
-error_reporting(E_ALL);
+session_start();
 
 require_once("../vendor/autoload.php");
-$tmpl = new ihrname\SimpleTemplateEngine(__DIR__ . "/../templates/");
+
+$factory = ndrobnjak\Factory::createFromIniFile(__DIR__ . "/../config.ini");
+
+
 
 switch($_SERVER["REQUEST_URI"]) {
 	case "/":
-		(new ihrname\Controller\IndexController($tmpl))->homepage();
+		$cnt = $factory->getIndexController();
+		$cnt->homepage();
 		break;
-	/*case "/test/upload":
-		if(file_put_contents(__DIR__ . "/../../upload/test.txt", "Mein erster Upload")) {
-			echo "It worked";
-		} else {
-			echo "Error happened";
+	case "/login":
+		$cnt = $factory->getLoginController();
+		if($_SERVER['REQUEST_METHOD'] === 'GET'){
+			$cnt->showLogin();
 		}
-		break;*/
-	case "/testroute":
-		echo "test";
+		else{
+			$cnt->Login($_POST);
+		}
 		break;
-	default:
-		$matches = [];
-		if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
-			(new ihrname\Controller\IndexController($tmpl))->greet($matches[1]);
+	case "/logout":
+		$cnt = $factory->getLoginController();
+		$cnt->Logout();
+		break;
+	case "/register":
+		$cnt = $factory->getRegisterController();
+		if($_SERVER['REQUEST_METHOD'] === 'GET'){
+			$cnt->showRegister();
+		}
+		else{
+			$cnt->Register($_POST);
+		}
+		break;
+		case "/change-pw":
+			$cnt = $factory->getLoginController();
+			$cnt->showForgotPW();
 			break;
-		}
-		echo "Not Found";
+		case "/search":
+			$cnt = $factory->getSearchController();
+			$cnt->showSearch();
+			break;
+		case "/account":
+			$cnt = $factory->getAccountController();
+			$cnt->showAccount();
+			break;
+		case "/add-series":
+			$cnt = $factory->getAddController();
+			$cnt->showAddSeries();
+			break;
+			case "/add-actors":
+				$cnt = $factory->getAddController();
+				$cnt->showAddActors();
+				break;
+		default:
+			$matches = [];
+			if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
+				$factory->getIndexController()->greet($matches[1]);
+				break;
+			}
+			echo "Not Found";
 }
 

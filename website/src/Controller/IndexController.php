@@ -1,18 +1,18 @@
 <?php
 
-namespace ihrname\Controller;
+namespace ndrobnjak\Controller;
 
-use ihrname\SimpleTemplateEngine;
+use ndrobnjak\SimpleTemplateEngine;
 
 class IndexController 
 {
   /**
-   * @var ihrname\SimpleTemplateEngine Template engines to render output
+   * @var ndrobnjak\SimpleTemplateEngine Template engines to render output
    */
   private $template;
   
   /**
-   * @param ihrname\SimpleTemplateEngine
+   * @param ndrobnjak\SimpleTemplateEngine
    */
   public function __construct(SimpleTemplateEngine $template)
   {
@@ -20,7 +20,8 @@ class IndexController
   }
 
   public function homepage() {
-    echo "INDEX";
+    echo $this->template->render("home.html.php");
+ //   echo $_SESSION['email'];
   }
 
   public function greet($name) {
