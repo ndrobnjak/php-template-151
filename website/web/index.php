@@ -39,16 +39,22 @@ switch($_SERVER["REQUEST_URI"]) {
 			$cnt->showForgotPW();
 			break;
 		case "/search":
-			$cnt = $factory->getSearchController();
+			$cnt = $factory->getSearchController();			
 			$cnt->showSearch();
 			break;		
 		case "/add-filme":
 			$cnt = $factory->getAddController();
-			$cnt->showAddFilm();
+			if($_SERVER['REQUEST_METHOD'] === 'GET'){
+				$cnt->showAddFilm();
+			}
+			else{
+				$cnt->Add($_POST);
+			}
+			
 			break;
-			case "/add-actors":
-				$cnt = $factory->getAddController();
-				$cnt->showAddActors();
+		case "/filme":
+				$cnt = $factory->getFilmController();
+				$cnt->showFilm();
 				break;
 		default:
 			$matches = [];

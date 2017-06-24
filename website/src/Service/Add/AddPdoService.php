@@ -10,14 +10,13 @@ class AddPdoService implements AddService
 		$this->pdo = $pdo;
 	}
 
-	public function addFilm($name)
+	public function addfilm($filmtitel, $beschreibung, $genreId)
 	{
-		$stmt = $this->pdo->prepare("INSERT INTO series WHERE name=?");
-		$stmt->bindValue(1, $name);
+		$stmt = $this->pdo->prepare("INSERT INTO Film (FilmTitel, Beschreibung, GenreID) VALUES(?, ?, ?)");
+		$stmt->bindValue(1, $filmtitel);
+		$stmt->bindValue(2, $beschreibung);
+		$stmt->bindValue(3, $genreId);
 		$stmt->execute();
-		$series = $stmt->fetchColumn();
-
-		return $series;
 	}
 }
 ?>

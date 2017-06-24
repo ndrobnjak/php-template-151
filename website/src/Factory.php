@@ -57,6 +57,14 @@ class Factory{
 				);
 	}
 	
+	public function getFilmController(){
+		return new Controller\FilmController(
+				$this->getTemplateEngine(),
+				$this->getFilmService()
+	
+				);
+	}
+	
 	public function getAddController(){
 		return new Controller\AddController(
 				$this->getTemplateEngine(),
@@ -104,6 +112,10 @@ class Factory{
 	
 	public function getDataService(){
 		return new Service\Data\DataPdoService($this->getPdo());
+	}
+	
+	public function getFilmService(){
+		return new Service\Film\FilmPdoService($this->getPdo());
 	}
 	
 	public function getAddService(){

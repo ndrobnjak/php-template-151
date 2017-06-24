@@ -13,11 +13,13 @@
 require_once("../web/header.php");
 ?>
 <body>
+<div id="hometext">
 Diese Seite wurde erstellt um Filme zu Bewerten.<br>
 Nur wenn Sie sich einloggen, können Sie auch die Filme bewerten, ansonsten können Sie sich Registrieren und dann bewerten.
 <br>
 Beim Film können Sie die Beschreibung lesen und dannach eine Bewertung erstellen, indem Sie einen Kommentar und Sterne hinterlassen.
 <br>
+</div>
 
 </body>
 
