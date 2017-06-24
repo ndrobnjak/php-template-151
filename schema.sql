@@ -3,7 +3,6 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-
 USE `app`;
 
 DROP TABLE IF EXISTS `Bewertungen`;
@@ -20,21 +19,22 @@ CREATE TABLE `Bewertungen` (
   CONSTRAINT `Bewertungen_ibfk_2` FOREIGN KEY (`FilmId`) REFERENCES `Film` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `Bewertungen` (`Id`, `Sterne`, `Kommentar`, `UserId`, `FilmId`) VALUES
+(2,	5,	'Best Action Film ever',	1,	1);
 
 DROP TABLE IF EXISTS `Film`;
 CREATE TABLE `Film` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `FilmTitel` varchar(255) NOT NULL,
   `Beschreibung` varchar(255) NOT NULL,
-  `BewertungenID` int(11) NOT NULL,
-  `GenreID` int(11) NOT NULL,
+  `GenreId` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `BewertungenID` (`BewertungenID`),
-  KEY `GenreID` (`GenreID`),
-  CONSTRAINT `Film_ibfk_1` FOREIGN KEY (`BewertungenID`) REFERENCES `Bewertungen` (`Id`),
-  CONSTRAINT `Film_ibfk_2` FOREIGN KEY (`GenreID`) REFERENCES `Genre` (`Id`)
+  KEY `GenreId` (`GenreId`),
+  CONSTRAINT `Film_ibfk_1` FOREIGN KEY (`GenreId`) REFERENCES `Genre` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `Film` (`Id`, `FilmTitel`, `Beschreibung`, `GenreId`) VALUES
+(1,	'Transformers 5: The Last Knight',	'Im letzten Teil hat Optimus Prime die Erde verlassen, um seinen Schöpfer zu suchen. Seitdem befinden sich die Menschheit und die Transformers in einem erbitterten Krieg. Als eine Bedrohung ungeahnten Ausmaßes den Planeten heimsucht, schließt sich eine',	1);
 
 DROP TABLE IF EXISTS `Genre`;
 CREATE TABLE `Genre` (
@@ -43,6 +43,8 @@ CREATE TABLE `Genre` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `Genre` (`Id`, `GenreName`) VALUES
+(1,	'Action');
 
 DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
